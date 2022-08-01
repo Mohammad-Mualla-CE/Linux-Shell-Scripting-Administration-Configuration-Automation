@@ -1,0 +1,23 @@
+##SELinux must be running in the Enforcing mode (permanent even after reboot).
+##Enforcing shoud be add to the configuration file /etc/selinux/config :
+
+#sestatus : to see the Current mode and Mode from config file "after reboot".
+
+
+
+#Enforcing mode for Current mode:
+
+setenforce 1
+#where 1 :Enforcing mode
+
+
+
+
+#Enforcing mode (permanent even after reboot):
+
+sed -i 's/SELINUX=permissive/SELINUX=enforcing/g' /etc/selinux/config
+
+sed -i 's/SELINUX=disabled/SELINUX=enforcing/g' /etc/selinux/config
+
+
+#END (^_^)

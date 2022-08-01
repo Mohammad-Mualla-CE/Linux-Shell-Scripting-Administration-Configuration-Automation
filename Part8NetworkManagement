@@ -1,0 +1,25 @@
+##part8:Network management
+## Open port 443 , 80
+## Make the changes permanent
+
+#start firewalld service
+systemctl start firewalld
+
+
+
+firewall-cmd --zone=public --add-port=443/udp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --zone=public --add-port=80/udp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+
+
+## Block ssh connection for your colleague ip to the VM
+##colleague ip:192.168.202.26
+
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="192.168.202.26" service name="ssh" log prefix="SSH Access" level="notice" reject' --permanent
+
+#reload to save the permanent changes
+firewall-cmd --reload
+
+

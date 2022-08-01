@@ -1,0 +1,48 @@
+##part7 Yum Repo
+
+##Install tmux on your machine : To create and maintain multiple pseudo-terminal instances
+yum install tmux
+
+
+##Install apache server on your machine(httpd):
+yum install httpd
+systemctl start httpd
+systemctl enable httpd
+
+
+##Install mysql:
+yum install mysql
+
+
+
+##List the number of available repositories in CentOS:
+#yum repolist
+
+
+
+##Create the New Repository:
+##creat new file for the new repositry
+( printf "[newRepo]\n" ; 
+printf "name=newRepo\n" ; 
+printf "baseurl=https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/\n" ; 
+printf "enabled=1\n" ;
+printf "gpgcheck=0" ) > /etc/yum.repos.d/newRepo.repo
+
+
+
+##--disablerepo:To disable repositories
+##--enablerepo :To enable  repositories
+
+##To disable all other repositories temporarily, except the 'newRepo' repository
+yum --disablerepo=*
+yum --enablerepo=newRepo
+
+
+#zabbix-web, php , zabbix-server, zabbix-agent rpm’s and their dependencies:
+yum install zabbix-web
+yum install php
+##!! yum install zabbix-server
+yum install zabbix-agent
+
+
+##END(^_^) !

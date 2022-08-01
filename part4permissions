@@ -1,0 +1,19 @@
+## Copy /etc/fstab to /var/tmp name as admin
+
+cp /etc/fstab /var/tmp/admin
+
+
+## the user1 could read, write and modify it
+#getfacl /var/tmp/admin : to list what are the permissions on a file admin
+
+setfacl -m u:user1:rwx /var/tmp/admin
+
+
+
+## while user2 can’t do any permission
+setfacl -m u:user2:--- /var/tmp/admin
+
+
+#getfacl /var/tmp/admin
+
+#END(^_^)

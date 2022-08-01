@@ -1,0 +1,87 @@
+##Create the New MariaDB Repository:
+##creat new file for the new repositry
+( printf "[mariadb]\n" ;
+printf "name=MariaDB\n" ;
+printf "baseurl=http://yum.mariadb.org/10.3/centos7-amd64\n" ;
+printf "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB\n" ;
+printf "gpgcheck=1" ) > /etc/yum.repos.d/MariaDB.repo
+
+
+##install Mariadb Server:
+
+yum install mariadb-server MariaDB-client
+
+systemctl start mariadb
+systemctl enable mariadb
+
+
+##secure installation for mysql
+mysql_secure_installation
+
+
+##Open ports in iptables from mariadb:
+
+#install iptables-services:
+yum install iptables-services
+
+systemctl start iptables
+systemctl enable iptables
+
+#Mysql by default it listen on TCP port 3306
+iptables -A INPUT -i eth0 -p tcp -m tcp --dport 3306 -j ACCEPT
+
+
+##To connect to the MariaDB server by root user:
+mysql -u root -p
+
+
+##Tocreate database " studentdb "
+CREATE DATABASE studentdb;
+
+
+##To creat user :
+#CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'user_password';
+CREATE USER 'MohammadUser'@'localhost' IDENTIFIED BY 'mnm2000';
+
+##To show the users:
+#SELECT User, Host FROM mysql.user;
+
+##Grand all privileges to a user account "MohammadUser" over a specific database "studentdb":
+#GRANT ALL PRIVILEGES ON database_name.* TO 'database_user'@'localhost';
+GRANT ALL PRIVILEGES ON studentdb.* TO 'MohammadUser'@'localhost';
+
+
+##To see the GRANTS for user MohammadUser: 
+#SHOW GRANTS FOR 'MohammadUser'@'localhost';
+
+
+##To  show the databases:
+#SHOW DATABASES;
+
+
+#Exit :exit using the DB
+exit
+
+##Connect to the database created " studentdb " , using the new user " MohammadUser " (with password):
+mysql -h localhost -u MohammadUser -p studentdb
+
+
+##To use the database " studentdb ":
+#USE studentdb;
+
+
+##To creat Table  " studentTable " :
+CREATE TABLE studentTable (studentFirstName VARCHAR(20), studentLastName VARCHAR(20), ProgramEnrolledIn VARCHAR(20), ExpectedQraduationYear INT, StudentNumber INT);
+
+
+#Add the 10 records for the table " studentTable ":
+
+INSERT INTO studentTable VALUES("Allen","Brown","mechanical",2017,110-001),("David","Brown","mechanical",2017,110-002),("Mary","Green","mechanical",2018,110-003),("Dennis","Green","electriical",2018,110-004),("joseph","Black","electriical",2018,110-005),("Dennis","Black","electriical",2020,110-006),("Ritchie","Salt","computer science",2020,110-007),("Robert","Salt","computer science",2020,110-008),("David","Suzuki","computer science",2020,110-009),("Mary","Chen","computer science",2020,110-010);
+
+##To List the Tabels records:
+SELECT * FROM studentTable;
+
+
+
+
+##End (^_^)

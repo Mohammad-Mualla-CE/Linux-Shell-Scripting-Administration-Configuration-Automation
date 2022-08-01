@@ -1,0 +1,62 @@
+##Add user:user1..uid=601,Password=redhat.The user's login shell should be non-interactive. (No ssh access to server):
+
+useradd -u 601 -s /sbin/nologin user1
+
+#If the user try to access the server he will get "This account is currently not available"
+#to let the user to access the server ,use "/bin/bash" with -s'shell' option ,to allow his ssh access
+
+
+##Password of user 1 =redhat:
+( echo "redhat"; echo "redhat" ) | passwd user1
+
+
+
+
+##Creat TrainingGroup:
+
+groupadd TrainingGroup
+
+
+
+
+##Add user1 to group TrainingGroup:
+
+gpasswd -M user1 TrainingGroup
+
+
+
+##Add users: user2, user3. The Additional group of the two users: user2, user3 is the admin
+##group Password: redhat, user 3 with root permissions
+
+##Creat adminGroup
+groupadd adminGroup
+
+
+#Add users: user2, user3:
+useradd user2
+useradd user3
+
+
+##Password of user2 =redhat:
+( echo "redhat"; echo "redhat" ) | passwd user2
+
+
+##Password of user3 =redhat:
+( echo "redhat"; echo "redhat" ) | passwd user3
+
+
+
+##Add user2 AND user3 to group adminGroup:
+
+gpasswd -M user2,user3 adminGroup
+
+
+##user 3 with root permissions
+##Add the permissions at the /etc/sudoers file
+
+printf "user3 ALL =(ALL) ALL\n" >> /etc/sudoers
+
+## END(^_^)
+
+
+

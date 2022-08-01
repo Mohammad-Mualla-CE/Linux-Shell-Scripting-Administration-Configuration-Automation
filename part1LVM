@@ -1,0 +1,63 @@
+
+##Create one Partition on Disk /dev/sdb which added using setting of virtual Box :
+##Partition /dev/sdb1 with size 16MB will be created
+##And changed type of partition from 'Linux' to 'LVM Linux'
+
+( echo n; echo p; echo 1; echo 2048; echo +1G; echo t; echo 8e; echo w ) | fdisk /dev/sdb
+#fdisk -l | grep -i "/dev/sdb1"
+
+
+
+
+##Create physical volume for Partition /dev/sdb1:
+
+pvcreate /dev/sdb1   
+
+#pvs | grep -i "/dev/sdb1"
+
+
+
+
+##Create volume group(vg1), witn 16M as extends:
+
+vgcreate -s 16M vg1 /dev/sdb1
+
+#vgs | grep -i "vg1"
+
+
+
+
+##Create logical Volume with 50 extends:
+
+lvcreate -l 50 -n logiaclVolume1 vg1
+
+#lvs | grep -i "logiaclVolume1"
+
+
+
+
+##Make the logical volume  as ext4 file system:
+
+mkfs -t ext4 /dev/vg1/logiaclVolume1
+
+
+
+
+##Make Directory /mnt/data :
+
+mkdir /mnt/data
+
+
+
+##Mount the logical Volum "/dev/vg1/logiaclVolume1" to /mnt/data
+
+mount /dev/vg1/logiaclVolume1 /mnt/data
+
+
+
+##Mounting automatically by add the mount script to /etc/fstab file :
+##Then apply command  mount -a:
+printf "/dev/vg1/logiaclVolume1  /mnt/data                       ext4     defaults        0 0\n">>/etc/fstab
+
+##END(^_^)
+

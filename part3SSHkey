@@ -1,0 +1,33 @@
+##Generate SSH key and connect to different VM without password.
+#Generat the public/private key , and save the files in ~/.ssh directory
+#-t rsa  option : to use rsa as the type of the key
+#-b 4096 option : make the key more secure
+
+ 
+ssh-keygen -t rsa -b 4096
+
+
+##Automatic command to copy the public key file to server vm with ip 192.168.203.40 as root log in:
+## saved in ~/.ssh/authorized_keys file
+##For the first log in to make the copy it required the passwd
+##Put after that it will not required the passwd TO make the ssh acces
+##Enter the passwd of the vm server root@192.168.203.40
+
+
+ssh-copy-id root@192.168.203.40
+ 
+
+
+
+#to make the ssh access to root@192.168.203.40 VM without password:
+
+ssh  root@192.168.203.40
+
+
+
+#To check:
+
+#ip addr show
+
+
+#END(^_^)

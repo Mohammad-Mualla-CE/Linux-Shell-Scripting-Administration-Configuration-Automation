@@ -1,0 +1,10 @@
+##Shell script that will keep running for 10 mins in the background:
+##And check the process that it's Created and try to kill using commands:
+
+sleep 10m
+
+## ./part6KillSleep & : for background running
+## jobs command to see the situation of the process
+##kill -15 %job number for the process to kill it,using secure kill
+
+#End (^_^)

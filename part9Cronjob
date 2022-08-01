@@ -1,0 +1,8 @@
+#iPirt 9: Cronjob
+##Create a cronjob that will run at 1:30 AM every day 
+## collect the users logged in and save them in a file Format : timestamp – users
+##Note: the cronjob can run a script
+
+( printf "i"; printf "30 01 * * * /TASKS/collectUusersLoggedInInfoForPart9.sh > /TASKS/output"; printf "\033"; printf ":wq"; printf "\n") | crontab -e
+
+#END(^_^)
