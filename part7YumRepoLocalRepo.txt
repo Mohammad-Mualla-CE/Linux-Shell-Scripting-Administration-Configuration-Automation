@@ -1,0 +1,49 @@
+#Part7 Yum Repo : local repo
+
+##Install tmux on your machine : To create and maintain multiple pseudo-terminal instances
+#yum install tmux
+
+
+##Install apache server on your machine(httpd):
+#yum install httpd
+#systemctl start httpd
+#systemctl enable httpd
+
+
+##Install mysql:
+#yum install mysql
+
+
+
+##List the number of available repositories in CentOS:
+#yum repolist
+
+
+#install createrepo cmd:
+#yum install createrepo
+
+#Create a repository directory
+#mkdir /var/www/html/localRepositry
+
+
+#Creat repository :
+#createrepo /var/www/html/localRepositry
+
+#install wget to downlode pakeges to the repository directory from the URL
+#wget -A rpm -r -l 5 https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/ -P .
+
+
+###Create the New Repository:
+##creat new file for the new repositry
+( printf "[localRepositry]\n" ;
+printf "name=localRepositry\n" ;
+printf "baseurl=file:///var/www/html/localRepositry\n" ;
+printf "enabled=1\n" ;
+printf "gpgcheck=0" ) > /etc/yum.repos.d/localRepositry.repo
+
+
+##disable ALL repositories :
+yum-config-manager --disable \*
+
+## enable localRepo :
+yum-config-manager --enable localRepositry
