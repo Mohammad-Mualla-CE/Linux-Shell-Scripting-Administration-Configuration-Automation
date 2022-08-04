@@ -34,8 +34,8 @@ printf "gpgcheck=0" ) > /etc/yum.repos.d/newRepo.repo
 ##--enablerepo :To enable  repositories
 
 ##To disable all other repositories temporarily, except the 'newRepo' repository
-yum --disablerepo=*
-yum --enablerepo=newRepo
+yum --disablerepo="*" update
+yum --enablerepo=newRepo update
 
 
 #zabbix-web, php , zabbix-server, zabbix-agent rpm’s and their dependencies:
