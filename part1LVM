@@ -1,6 +1,6 @@
 
 ##Create one Partition on Disk /dev/sdb which added using setting of virtual Box :
-##Partition /dev/sdb1 with size 16MB will be created
+##Partition /dev/sdb1 with size 1GB will be created
 ##And changed type of partition from 'Linux' to 'LVM Linux'
 
 ( echo n; echo p; echo 1; echo 2048; echo +1G; echo t; echo 8e; echo w ) | fdisk /dev/sdb
