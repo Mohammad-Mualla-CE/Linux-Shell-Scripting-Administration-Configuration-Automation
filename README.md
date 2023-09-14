@@ -1,4 +1,4 @@
-# linux + shell _ Task1
+# linux + shell - Task1
 
 
 ## Part 1: LVM
