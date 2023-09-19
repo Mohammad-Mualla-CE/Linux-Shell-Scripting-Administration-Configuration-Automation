@@ -1,4 +1,4 @@
-# linux + shell - Task1
+# Linux-Shell-Scripting-Administration-Configuration-Automation
 
 
 ## Part 1: LVM
